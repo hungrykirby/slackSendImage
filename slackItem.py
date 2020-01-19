@@ -9,34 +9,33 @@ load_dotenv(dotenv_path)
 
 class SlackItem:
   token = None
+  SLACK_API_BASE = "https://slack.com/api/"
 
   def __init__(self):
     self.token = os.environ.get("TOKEN")
 
-  def post_with_img(self, img_path):
+  def post_with_img(self, img_path, file_title, initial_comment):
     token = self.token
-    url = "https://slack.com/api/files.upload"
+    url = self.SLACK_API_BASE + "files.upload"
     data = {
       'token': token,
       'channels': '#imgs',
-      'title': 'my file',
-      'initial_comment': "initilal\ncomment"
+      'title': file_title,
+      'initial_comment': initial_comment
     }
     img_file = {'file': open(img_path, 'rb')}
     if token:
       requests.post(url, data=data, files=img_file)
   
   def test(self):
-    # 設定
-    url = 'https://slack.com/api/chat.postMessage'
+    url = self.SLACK_API_BASE + 'chat.postMessage'
     token = self.token
-    CHANNEL='#imgs'
-    TEXT='test'
+    text = "test post"
 
     post_json = {
-        'token': self.TOKEN,
-        'text': TEXT,
-        'channel': CHANNEL,
+        'token': token,
+        'text': text,
+        'channel': '#imgs',
         'link_names': 1
     }
     if token:
