@@ -1,5 +1,3 @@
-# import slackItem
-
 import slackItem
 
 def main():
