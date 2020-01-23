@@ -8,7 +8,7 @@ class HtmlFetcher:
   def __init__(self, url):
     self.url = url
 
-  def fetch_pressure_from_jma(search_time = datetime.datetime.now()):
+  def fetch_pressure_from_jma(self, search_time = datetime.datetime.now()):
     url = "https://www.jma.go.jp/jp/amedas_h/today-44132.html"
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
@@ -16,7 +16,7 @@ class HtmlFetcher:
     list_time_pressure = []
     for tr in trs:
       tds = tr.select("td")
-      print(tds[0].get_text().isdigit())
+      # print(tds[0].get_text().isdigit())
       if tds[0].get_text().isdigit() and tds[8].get_text().replace('\xa0', ''):
         list_time_pressure.append(
           {
@@ -24,11 +24,13 @@ class HtmlFetcher:
             'pressure': tds[8].get_text()
           }
         )
-    print("---")
     if len(list_time_pressure) == 0:
       return None
     else:
+      if search_time:
+        # 指定した時刻に最も近いデータを取得
+        sorted_time_pressures = sorted(list_time_pressure, key=lambda x: abs(int(search_time.hour - x['time'])))
+        return sorted_time_pressures
+      # もっとも時間が最近のものを取得
       sorted_time_pressures = sorted(list_time_pressure, key=lambda x:-x['time'])
-      nearest = sorted_time_pressures[0]
-    print(nearest)
-    print("---")
+      return sorted_time_pressures

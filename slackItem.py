@@ -27,6 +27,19 @@ class SlackItem:
     if token:
       requests.post(url, data=data, files=img_file)
   
+  def post_text(self, text):
+    url = self.SLACK_API_BASE + 'chat.postMessage'
+    token = self.token
+
+    post_json = {
+      'token': token,
+      'text': text,
+      'channel': '#imgs',
+      'link_names': 1
+    }
+    if token:
+      requests.post(url, data = post_json)
+  
   def test(self):
     url = self.SLACK_API_BASE + 'chat.postMessage'
     token = self.token
