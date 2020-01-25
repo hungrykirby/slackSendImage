@@ -133,3 +133,4 @@ dmypy.json
 
 # 秘密鍵を入れるためにjsonは解除
 *.json
+api_packages/*.json

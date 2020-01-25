@@ -24,7 +24,7 @@ class GoogleItem:
     json_file_name = os.environ.get("JSON_FILE_NAME")
     if dev == False:
       self.spreadsheet_key = os.environ.get("SPREADSHEET_KEY_DEV")
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(join(os.getcwd(), json_file_name), self.scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(join(dirname(__file__), json_file_name), self.scope)
     self.gc = gspread.authorize(credentials)
 
   def test(self):
