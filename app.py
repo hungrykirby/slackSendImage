@@ -21,7 +21,11 @@ def main():
   text += fetched_html_data['data'][0]['pressure'] + 'hPaです'
   si.post_text(text)
 
-  g = googleItem.GoogleItem()
+  if len(args) > 1:
+    dev = True
+  else:
+    dev = False
+  g = googleItem.GoogleItem(dev)
   g.write_pressure_spreadsheet(
     fetched_html_data['info']['place'],
     fetched_html_data['info']['year'],
