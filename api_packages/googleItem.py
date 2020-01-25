@@ -20,8 +20,10 @@ class GoogleItem:
   spreadsheet_key = os.environ.get("SPREADSHEET_KEY")
   gc = None
 
-  def __init__(self):
+  def __init__(self, dev):
     json_file_name = os.environ.get("JSON_FILE_NAME")
+    if dev == False:
+      self.spreadsheet_key = os.environ.get("SPREADSHEET_KEY_DEV") 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file_name, self.scope)
     self.gc = gspread.authorize(credentials)
 
