@@ -33,7 +33,7 @@ class SlackItem:
   def post_text(self, text):
     url = self.SLACK_API_BASE + 'chat.postMessage'
     token = self.token
-    print(self.channel)
+    # print(self.channel)
 
     post_json = {
       'token': token,

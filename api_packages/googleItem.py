@@ -29,6 +29,20 @@ class GoogleItem:
     worksheet = self.gc.open_by_key(self.spreadsheet_key).sheet1
     import_value = int(worksheet.acell('A1').value)
 
-    export_value = import_value+1000
-    worksheet.update_cell(1,2, export_value)
+    # export_value = import_value+1000
+    # worksheet.update_cell(1,2, export_value)
+    print(len(worksheet.get_all_values()[0]))
+    last_line = len(worksheet.get_all_values()) + 1
+    worksheet.update_cell(last_line, 2, 3)
+  
+  def write_pressure_spreadsheet(self, place, year, month, date, time, pressure):
+    worksheet = self.gc.open_by_key(self.spreadsheet_key).sheet1
+    last_line = len(worksheet.get_all_values()) + 1
+    worksheet.update_cell(last_line, 1, place)
+    worksheet.update_cell(last_line, 2, year)
+    worksheet.update_cell(last_line, 3, month)
+    worksheet.update_cell(last_line, 4, date)
+    worksheet.update_cell(last_line, 5, time)
+    worksheet.update_cell(last_line, 6, pressure)
+    
 
