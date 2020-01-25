@@ -1,6 +1,3 @@
-import fetchHtml
-
-test = fetchHtml.HtmlFetcher(None)
-
-hoge = test.fetch_pressure_from_jma()
-print(hoge)
+from data_packages import fetchHtml
+a = fetchHtml.HtmlFetcher(None).fetch_pressure_from_jma()
+print(a)

@@ -130,3 +130,6 @@ dmypy.json
 
 # vscode
 .vscode/
+
+# 秘密鍵を入れるためにjsonは解除
+*.json

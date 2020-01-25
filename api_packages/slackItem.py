@@ -9,17 +9,20 @@ load_dotenv(dotenv_path)
 
 class SlackItem:
   token = None
+  channel = None
   SLACK_API_BASE = "https://slack.com/api/"
 
-  def __init__(self):
+  def __init__(self, channel = 'imgs'):
     self.token = os.environ.get("TOKEN")
+    self.channel = channel
 
   def post_with_img(self, img_path, file_title, initial_comment):
     token = self.token
+    channel = self.channel
     url = self.SLACK_API_BASE + "files.upload"
     data = {
       'token': token,
-      'channels': '#imgs',
+      'channels': '#' + channel,
       'title': file_title,
       'initial_comment': initial_comment
     }
@@ -30,11 +33,12 @@ class SlackItem:
   def post_text(self, text):
     url = self.SLACK_API_BASE + 'chat.postMessage'
     token = self.token
+    print(self.channel)
 
     post_json = {
       'token': token,
       'text': text,
-      'channel': '#imgs',
+      'channel': '#' + self.channel,
       'link_names': 1
     }
     if token:
@@ -48,7 +52,7 @@ class SlackItem:
     post_json = {
         'token': token,
         'text': text,
-        'channel': '#imgs',
+        'channel': '#' + self.channel,
         'link_names': 1
     }
     if token:
