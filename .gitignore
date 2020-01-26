@@ -134,3 +134,11 @@ dmypy.json
 # 秘密鍵を入れるためにjsonは解除
 *.json
 api_packages/*.json
+
+# test file
+test.py
+test.jpg
+test.png
+
+# 画像
+imgs/*.png

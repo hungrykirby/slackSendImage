@@ -11,12 +11,13 @@ class SlackItem:
   token = None
   channel = None
   SLACK_API_BASE = "https://slack.com/api/"
+  rootdir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
   def __init__(self, channel = 'imgs'):
     self.token = os.environ.get("TOKEN")
     self.channel = channel
 
-  def post_with_img(self, img_path, file_title, initial_comment):
+  def post_with_img(self, file_name, file_title, initial_comment):
     token = self.token
     channel = self.channel
     url = self.SLACK_API_BASE + "files.upload"
@@ -26,7 +27,7 @@ class SlackItem:
       'title': file_title,
       'initial_comment': initial_comment
     }
-    img_file = {'file': open(img_path, 'rb')}
+    img_file = {'file': open(join(self.rootdir, 'imgs', file_name), 'rb')}
     if token:
       requests.post(url, data=data, files=img_file)
   
