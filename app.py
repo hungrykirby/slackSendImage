@@ -31,7 +31,6 @@ def main():
   else:
     dev = False
   g = googleItem.GoogleItem(dev)
-  '''
   g.write_pressure_spreadsheet(
     fetched_html_data['info']['place'],
     fetched_html_data['info']['year'],
@@ -40,11 +39,10 @@ def main():
     fetched_html_data['data'][0]['time'],
     fetched_html_data['data'][0]['pressure']
   )
-  '''
   data_for_graph = g.fetch_pressure_time(12)
   generator = generateGraph.GraphGenerator("relation of pressure and time", file_name + '.png')
   generator.set_labels('time', 'pressure')
-  generator.create_pressure_graph(data_for_graph['time'], data_for_graph['pressure'])
+  generator.create_pressure_graph(list(reversed(data_for_graph['time'])), list(reversed(data_for_graph['pressure'])))
 
   si.post_with_img(file_name + '.png', '保存した画像', text)
 
