@@ -1,5 +1,5 @@
 # SlackSendImage
-東京の気圧を[気象庁](https://www.jma.go.jp/jp/amedas_h/today-44132.html){:target=>"_blank"}のページから取得して、過去12時間の気圧のグラフを作成したうえで `Slack` に通知する。
+東京の気圧を[気象庁](https://www.jma.go.jp/jp/amedas_h/today-44132.html)のページから取得して、過去12時間の気圧のグラフを作成したうえで `Slack` に通知する。
 
 ```
 python=3.8
