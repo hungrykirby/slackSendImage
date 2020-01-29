@@ -16,12 +16,12 @@ pip install oauth2client
 ```
 `token` は `slack` `google api` ともに取得して `json` をカレントディレクトリに配置（これはゆくゆく変えたい）
 
-```shell=
+```sh
 python app.py
 ```
 `#imgs` というチャンネルにデフォルトで投稿される
 
-```shell=
+```sh
 python app.py random
 ```
 こう指定すると `random` チャンネルに投稿される。
