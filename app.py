@@ -25,7 +25,6 @@ def main():
   text += str(fetched_html_data['data'][0]['time']) + '時の気圧は'
   text += fetched_html_data['data'][0]['pressure'] + 'hPaです'
   # si.post_text(text)
-
   if len(args) > 1:
     dev = True
   else:

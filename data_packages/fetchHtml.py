@@ -12,6 +12,8 @@ class HtmlFetcher:
 
   def fetch_pressure_from_jma(self, search_time = datetime.datetime.now()):
     url = "https://www.jma.go.jp/jp/amedas_h/today-44132.html"
+    time_index = 0
+    pressure_index = 7 # 2020-05-10より（それまでは8）
     try:
       res = requests.get(url)
       soup = BeautifulSoup(res.text, 'html.parser')
@@ -19,14 +21,14 @@ class HtmlFetcher:
       list_time_pressure = []
       for tr in trs:
         tds = tr.select("td")
-        # print(tds[0].get_text().isdigit())
-        if tds[0].get_text().isdigit() and tds[8].get_text().replace('\xa0', ''):
+        if tds[time_index].get_text().isdigit() and tds[pressure_index].get_text().replace('\xa0', ''):
           list_time_pressure.append(
             {
-              'time': int(tds[0].get_text()),
-              'pressure': tds[8].get_text()
+              'time': int(tds[time_index].get_text()),
+              'pressure': tds[pressure_index].get_text()
             }
           )
+      print(list_time_pressure)
       if len(list_time_pressure) == 0:
         return None
       else:
